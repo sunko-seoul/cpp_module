@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 14:44:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:46:57 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CONTACT_H
 # include <iostream>
 # include <string>
+# include <iomanip>
 
 class Contact
 {
@@ -33,11 +34,11 @@ class Contact
 		std::string	get_nick_name(void);
 		std::string	get_phone_number(void);
 		std::string	get_darkset_secret(void);
-		void		set_first_name(std::string s);
-		void		set_last_name(std::string s);
-		void		set_nick_name(std::string s);
-		void		set_phone_number(std::string s);
-		void		set_darkest_secret(std::string s);
+		int			set_first_name(void);
+		int			set_last_name(void);
+		int			set_nick_name(void);
+		int			set_phone_number(void);
+		int			set_darkest_secret(void);
 };
 
 #endif

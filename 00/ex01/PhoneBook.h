@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:34 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 14:51:52 by sunko            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:01:31 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class PhoneBook
 		Contact contact[8];
 		int		valid[8];
 	public:
-		PhoneBook(/* args */);
+		PhoneBook();
 		~PhoneBook();
 		PhoneBook(const PhoneBook &other);
 		PhoneBook& operator=(const PhoneBook &other);

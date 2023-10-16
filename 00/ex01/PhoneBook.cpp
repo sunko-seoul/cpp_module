@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 15:02:27 by sunko            ###   ########.fr       */
+/*   Updated: 2023/10/16 17:32:58 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,17 @@ void	PhoneBook::Display(void)
 
 void	PhoneBook::Search_idx(int idx)
 {
+	idx--;
 	if (!PhoneBook::isValid(idx))
 	{
 		std::cout << "this index not vaild\n";
 		return ;
 	}
+	std::cout << std::right << std::setw(10) << "idx" << " | ";
+	std::cout << std::right << std::setw(10) << "first name" << " | ";
+	std::cout << std::right << std::setw(10) << "last name" << " | ";
+	std::cout << std::right << std::setw(10) << "nick name" << std::endl;
+
 	std::cout << std::right << std::setw(10) << idx << " | ";
 	std::cout << std::right << std::setw(10) << contact[idx].get_first_name() << " | ";
 	std::cout << std::right << std::setw(10) << contact[idx].get_last_name() << " | ";

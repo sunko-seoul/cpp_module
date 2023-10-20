@@ -1,22 +1,18 @@
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
-NAME = weapon
+NAME = Harl
 SRCS = main.cpp\
-	   HumanA.cpp\
-	   HumanB.cpp\
-	   Weapon.cpp
+	   Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = HumanA.h\
-		 HumanB.h\
-		 Weapon.h
+HEADER = Harl.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(VERSION) -o $@ $^
 
-%.o: %.cpp %.h
+%.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) $(VERSION) -c $< -o $@
 
 clean:

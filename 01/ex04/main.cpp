@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:15:02 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/20 17:26:15 by sunko            ###   ########.fr       */
+/*   Updated: 2023/10/20 22:37:23 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ std::string string_compare(const std::string &s1, const std::string &s2, std::st
 
 	for (i = 0; i < get_line.length(); ++i, ++j)
 	{
+		//if (get_line.find(s1, i) != std::string::npos)
 		if (s1[0] == get_line[i] && s1.compare(0, s1.length(), get_line, i, s1.length()) == 0)
 		{
 			result += s2;

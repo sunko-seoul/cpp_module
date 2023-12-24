@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 17:32:58 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 02:27:55 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,87 +16,79 @@
 PhoneBook::PhoneBook()
 {
 	for (int i = 0; i < 8; ++i)
-		valid[i] = 0;
+		SetValid(i, 0);
 }
 
-PhoneBook::~PhoneBook(){};
-
-PhoneBook::PhoneBook(const PhoneBook &other)
-{
-	if (this != &other)
-	{
-		int i = 0;
-		while (i <= 7 && valid[i] == 1)
-		{
-			PhoneBook::contact[i] = other.contact[i];
-			i++;
-		}
-	}
-}
-
-PhoneBook& PhoneBook::operator=(const PhoneBook &other)
-{
-	if (this != &other)
-	{
-		int i = 0;
-		while (i <= 7 && valid[i] == 1)
-		{
-			PhoneBook::contact[i] = other.contact[i];
-			i++;
-		}
-	}
-	return *this;
-}
-
-void	PhoneBook::Add(Contact &new_contact, int cnt)
+void	PhoneBook::Add(const Contact &new_mContacts, const int cnt)
 {
 	if (cnt < 8)
-		valid[cnt] = 1;
-	contact[cnt % 8] = new_contact;
+		SetValid(cnt, 1);
+	SetContact(cnt % 8, new_mContacts);
 }
 
-
-void	PhoneBook::Display(void)
+void	PhoneBook::Display(PhoneBook &PhoneBook)
 {
 	int i = 0;
-	std::cout << std::right << std::setw(10) << "idx" << " | ";
-	std::cout << std::right << std::setw(10) << "first name" << " | ";
-	std::cout << std::right << std::setw(10) << "last name" << " | ";
-	std::cout << std::right << std::setw(10) << "nick name" << std::endl;
-	while (i <= 7 && valid[i] == 1)
+	DisplayInfoRow();
+	while (i < 8 && GetValid(i) == 1)
 	{
-		std::cout << std::right << std::setw(10) << i + 1 << " | ";
-		std::cout << std::right << std::setw(10) << contact[i].get_first_name() << " | ";
-		std::cout << std::right << std::setw(10) << contact[i].get_last_name() << " | ";
-		std::cout << std::right << std::setw(10) << contact[i].get_nick_name() << std::endl;
+		DisplayContactRow(PhoneBook.GetContact(i), i + 1);
 		i++;
 	}
 }
 
-void	PhoneBook::Search_idx(int idx)
+void	PhoneBook::SearchIdx(PhoneBook &PhoneBook, const int idx)
 {
-	idx--;
-	if (!PhoneBook::isValid(idx))
+	const int validIdx = idx - 1;
+	if (!PhoneBook::IsValid(validIdx))
 	{
-		std::cout << "this index not vaild\n";
+		std::cout << "this index not vaild" << std::endl;
 		return ;
 	}
-	std::cout << std::right << std::setw(10) << "idx" << " | ";
-	std::cout << std::right << std::setw(10) << "first name" << " | ";
-	std::cout << std::right << std::setw(10) << "last name" << " | ";
-	std::cout << std::right << std::setw(10) << "nick name" << std::endl;
-
-	std::cout << std::right << std::setw(10) << idx << " | ";
-	std::cout << std::right << std::setw(10) << contact[idx].get_first_name() << " | ";
-	std::cout << std::right << std::setw(10) << contact[idx].get_last_name() << " | ";
-	std::cout << std::right << std::setw(10) << contact[idx].get_nick_name() << std::endl;
+	DisplayInfoRow();
+	DisplayContactRow(PhoneBook.GetContact(validIdx), idx);
 }
 
-bool	PhoneBook::isValid(int idx)
+bool	PhoneBook::IsValid(int idx)
 {
-	if (valid[idx])
+	if (GetValid(idx))
 		return true;
 	else
 		return false;
 }
 
+void	PhoneBook::SetValid(const int idx, const int value)
+{
+	mValid[idx] = value;
+}
+
+void	PhoneBook::SetContact(const int idx, const Contact &contact)
+{
+	mContacts[idx] = contact;
+}
+
+int	PhoneBook::GetValid(const int idx) const
+{
+	return (mValid[idx]);
+}
+
+const Contact	PhoneBook::GetContact(const int idx) const
+{
+	return (mContacts[idx]);
+}
+
+void	PhoneBook::DisplayInfoRow(void) const
+{
+	std::cout << std::right << std::setw(10) << "idx" << " | ";
+	std::cout << std::right << std::setw(10) << "first name" << " | ";
+	std::cout << std::right << std::setw(10) << "last name" << " | ";
+	std::cout << std::right << std::setw(10) << "nick name" << std::endl;
+}
+
+void	PhoneBook::DisplayContactRow(Contact contact, const int idx) const
+{
+	std::cout << std::right << std::setw(10) << idx << " | ";
+	std::cout << std::right << std::setw(10) << contact.GetFirstName() << " | ";
+	std::cout << std::right << std::setw(10) << contact.GetLastName() << " | ";
+	std::cout << std::right << std::setw(10) << contact.GetNickName() << std::endl;
+}

@@ -6,214 +6,130 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:04 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 17:15:25 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 02:18:03 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.h"
 
-Contact::Contact(){}
-
-Contact::~Contact(){}
-
-Contact::Contact(const Contact &other)
+std::string	Contact::GetFirstName(void)
 {
-	if (&other != this)
-	{
-		this->first_name = other.first_name;
-		this->last_name = other.last_name;
-		this->nick_name = other.nick_name;
-		this->phone_number = other.phone_number;
-		this->darkest_secret = other.darkest_secret;
-	}
+	return mFirstName;
 }
 
-Contact&	Contact::operator=(const Contact &other)
+std::string	Contact::GetLastName(void)
 {
-	if (this != &other)
-	{
-		this->first_name = other.first_name;
-		this->last_name = other.last_name;
-		this->nick_name = other.nick_name;
-		this->phone_number = other.phone_number;
-		this->darkest_secret = other.darkest_secret;
-	}
-	return *this;
+	return mLastName;
 }
 
-std::string	Contact::get_first_name(void)
+std::string	Contact::GetNickName(void)
 {
-	return first_name;
+	return mNickName;
 }
 
-std::string Contact::get_last_name(void)
+std::string	Contact::GetPhoneNumber(void)
 {
-	return last_name;
+	return mPhoneNumber;
 }
 
-std::string Contact::get_nick_name(void)
+std::string	Contact::GetDarkestSecret(void)
 {
-	return nick_name;
+	return mDarkestSecret;
 }
 
-std::string Contact::get_phone_number(void)
+void	Contact::SetFirstName(const std::string &str)
 {
-	return phone_number;
+	mFirstName = str;
 }
 
-std::string Contact::get_darkset_secret(void)
+void	Contact::SetLastName(const std::string &str)
 {
-	return darkest_secret;
+	mLastName = str;
 }
 
-int	Contact::set_first_name(void)
+void	Contact::SetNickName(const std::string &str)
 {
-	std::string s;
+	mNickName = str;
+}
 
-	std::cout << std::setw(10) << "first name : ";
-	std::cin >> std::ws;
-	if (!std::getline(std::cin, s))
-	{
-		std::cerr << "getline error!" << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::string::size_type len = s.size();
+void	Contact::SetPhoneNumber(const std::string &str)
+{
+	mPhoneNumber = str;
+}
+
+void	Contact::SetDarkestSecret(const std::string &str)
+{
+	mDarkestSecret = str;
+}
+
+int	Contact::IsValidLetter(const std::string &str)
+{
+	std::string::size_type	len;
+
+	len = str.size();
 	for (std::string::size_type i = 0; i < len; ++i)
 	{
-		if (!std::isalnum(s[i]))
-		{
-			std::cout << "first name consists of only numbers and alphabets" << std::endl;
-			return -1;
-		}
+		if (!std::isalnum(str[i]))
+			return (0);
 	}
-	if (len > 10)
-	{
-		first_name = s.substr(0, 10);
-		s[9] = '.';
-		return 0;
-	}
-	first_name = s;
-	return 0;
+	return (1);
 }
 
-int	Contact::set_last_name(void)
+int	Contact::IsValidNumber(const std::string &str)
 {
-	std::string s;
+	std::string::size_type	len;
 
-	std::cout << "last name : ";
-	std::cin >> std::ws;
-	if (!std::getline(std::cin, s))
-	{
-		std::cerr << "getline error!" << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::string::size_type len = s.size();
+	len = str.size();
 	for (std::string::size_type i = 0; i < len; ++i)
 	{
-		if (!std::isalnum(s[i]))
-		{
-			std::cout << "last name consists of only numbers and alphabets" << std::endl;
-			return -1;
-		}
+		if (!std::isdigit(str[i]))
+			return (0);
 	}
-	if (len > 10)
-	{
-		last_name = s.substr(0, 10);
-		s[9] = '.';
-		return 0;
-	}
-	last_name = s;
-	return 0;
+	return (1);
 }
 
-int	Contact::set_nick_name(void)
+const std::string	Contact::ReadLetter(void)
 {
-	std::string s;
+	std::string	input;
 
-	std::cout << "nick name : ";
 	std::cin >> std::ws;
-	if (!std::getline(std::cin, s))
+	while (std::getline(std::cin, input))
 	{
-		std::cerr << "getline error!" << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::string::size_type len = s.size();
-	for (std::string::size_type i = 0; i < len; ++i)
-	{
-		if (!std::isalnum(s[i]))
+		if (IsValidLetter(input))
 		{
-			std::cout << "nick name consists of only numbers and alphabets" << std::endl;
-			return -1;
+			if (input.size() > 10)
+			{
+				input = input.substr(0, 10);
+				input[9] = '.';
+			}
+			return (input);
 		}
+		else
+			std::cerr << "This type is consists of only alphabets" << std::endl;
 	}
-	if (len > 10)
-	{
-		nick_name = s.substr(0, 10);
-		s[9] = '.';
-		return 0;
-	}
-	nick_name = s;
-	return 0;
+	std::cerr << "EOF" << std::endl;
+	return ("");
 }
 
-int	Contact::set_phone_number(void)
+const std::string	Contact::ReadNumber(void)
 {
-	std::string s;
+	std::string	input;
 
-	std::cout << "phone number : ";
 	std::cin >> std::ws;
-	if (!std::getline(std::cin, s))
+	while (std::getline(std::cin, input))
 	{
-		std::cerr << "getline error!" << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::string::size_type len = s.size();
-	for (std::string::size_type i = 0; i < len; ++i)
-	{
-		if (!std::isdigit(s[i]))
+		if (IsValidNumber(input))
 		{
-			std::cout << "phone number consists of only numbers" << std::endl;
-			return -1;
+			if (input.size() > 10)
+			{
+				input = input.substr(0, 10);
+				input[9] = '.';
+			}
+			return (input);
 		}
+		else
+			std::cerr << "This type is consists of only numbers" << std::endl;
 	}
-	if (len > 10)
-	{
-		phone_number = s.substr(0, 10);
-		s[9] = '.';
-		return 0;
-	}
-	phone_number = s;
-	return 0;
+	std::cerr << "EOF" << std::endl;
+	return ("");
 }
-
-int	Contact::set_darkest_secret(void)
-{
-	std::string s;
-
-	std::cout << "darkset_secret : ";
-	std::cin >> std::ws;
-	if (!std::getline(std::cin, s))
-	{
-		std::cerr << "getline error!" << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::string::size_type len = s.size();
-	for (std::string::size_type i = 0; i < s.size(); ++i)
-	{
-		if (!std::isalnum(s[i]))
-		{
-			std::cout << "nick name consists of only numbers and alphabets" << std::endl;
-			return -1;
-		}
-	}
-	if (len > 10)
-	{
-		darkest_secret = s.substr(0, 10);
-		s[9] = '.';
-		return 0;
-	}
-	darkest_secret = s;
-	return 0;
-}
-
-

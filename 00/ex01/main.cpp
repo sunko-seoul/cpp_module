@@ -6,49 +6,65 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:02:13 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 17:29:39 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 02:36:24 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.h"
 #include "PhoneBook.h"
 
-int	add_cmd(PhoneBook &MyBook, int add_cnt)
+int	IsValidNumber(const std::string &str)
 {
-	Contact NewContact;
-	int		err_num;
+	std::string::size_type	len;
 
-	err_num = NewContact.set_first_name();
-	if (err_num == -1)
-		return -1;
-	else if (err_num == EXIT_FAILURE)
-		return EXIT_FAILURE;
+	len = str.size();
+	for (std::string::size_type i = 0; i < len; ++i)
+	{
+		if (!std::isdigit(str[i]))
+			return (0);
+	}
+	return (1);
+}
 
-	err_num = NewContact.set_last_name();
-	if (err_num == -1)
-		return -1;
-	else if (err_num == EXIT_FAILURE)
-		return EXIT_FAILURE;
+int	AddCmd(PhoneBook &MyBook, int &addCnt)
+{
+	std::string	input;
+	Contact Contact;
 
-	err_num = NewContact.set_nick_name();
-	if (err_num == -1)
-		return -1;
-	else if (err_num == EXIT_FAILURE)
-		return EXIT_FAILURE;
+	std::cout << "First name: ";
+	input = Contact.ReadLetter();
+	if (input == "")
+		return (-1);
+	else
+		Contact.SetFirstName(input);
+	std::cout << "Last name: ";
+	input = Contact.ReadLetter();
+	if (input == "")
+		return (-1);
+	else
+		Contact.SetLastName(input);
 
-	err_num = NewContact.set_phone_number();
-	if (err_num == -1)
-		return -1;
-	else if (err_num == EXIT_FAILURE)
-		return EXIT_FAILURE;
+	std::cout << "Phone number: ";
+	input = Contact.ReadNumber();
+	if (input == "")
+		return (-1);
+	else
+		Contact.SetPhoneNumber(input);
 
-	err_num = NewContact.set_darkest_secret();
-	if (err_num == -1)
-		return -1;
-	else if (err_num == EXIT_FAILURE)
-		return EXIT_FAILURE;
+	std::cout << "Nick name: ";
+	input = Contact.ReadLetter();
+	if (input == "")
+		return (-1);
+	else
+		Contact.SetNickName(input);
 
-	MyBook.Add(NewContact, add_cnt++);
+	std::cout << "Nick DarkestSecret: ";
+	input = Contact.ReadLetter();
+	if (input == "")
+		return (-1);
+	else
+		Contact.SetDarkestSecret(input);
+	MyBook.Add(Contact, addCnt++);
 	return 0;
 }
 
@@ -56,8 +72,8 @@ int	add_cmd(PhoneBook &MyBook, int add_cnt)
 int	main(void)
 {
 	PhoneBook	MyBook;
-	int			add_cnt = 0;
-	int			err_num = 0;
+	int			addCnt = 0;
+	int			err = 0;
 
 	while (1)
 	{
@@ -65,34 +81,36 @@ int	main(void)
 
 		std::cout << "please input command (ADD, SEARCH, EXIT) : ";
 		std::cin >> std::ws;
-		if (!std::getline(std::cin, cmd))
-		{
-			std::cerr << "getline error!" << std::endl;
-			return EXIT_FAILURE;
-		}
-		if (cmd == "EXIT")
+		if (!std::getline(std::cin, cmd) || cmd == "EXIT")
 			break ;
-		else if (cmd == "ADD")
+		if (cmd == "ADD")
 		{
-			err_num = add_cmd(MyBook, add_cnt);
-			if (err_num == -1)
+			err = AddCmd(MyBook, addCnt);
+			if (err == -1)
 				continue;
-			else if (err_num == EXIT_FAILURE)
-				return EXIT_FAILURE;
 		}
 		else if (cmd == "SEARCH")
 		{
-			char idx;
-			MyBook.Display();
-			std::cout << "please input index : ";
-			std::cin >> idx;
-			std::cout << "idx = " << idx << " isdisit(idx) : " << isdigit(idx) << std::endl;
-			if (!isdigit(idx))
+			std::string idx;
+
+			MyBook.Display(MyBook);
+			std::cout << "please input index (1 ~ 8): ";
+			while (std::getline(std::cin, idx))
 			{
-				std::cout << "index consist of only numbers" << std::endl;
-				continue;
+				if (IsValidNumber(idx))
+				{
+					int i_idx = std::stoi(idx);
+					if (i_idx < 1 || i_idx > 8)
+						std::cerr << "Index is only (1 ~ 8)" << std::endl;
+					else
+					{
+						MyBook.SearchIdx(MyBook, std::stoi(idx));
+						break ;
+					}
+				}
+				else
+					std::cerr << "Index is only number" << std::endl;
 			}
-			MyBook.Search_idx(idx - '0');
 		}
 		else
 			std::cout << "not found this command!" << std::endl;

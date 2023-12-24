@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 16:46:57 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 02:17:04 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,28 @@
 class Contact
 {
 	private:
-		std::string first_name;
-		std::string last_name;
-		std::string nick_name;
-		std::string phone_number;
-		std::string darkest_secret;
+		std::string mFirstName;
+		std::string mLastName;
+		std::string mNickName;
+		std::string mPhoneNumber;
+		std::string mDarkestSecret;
 	public:
-		Contact();
-		~Contact();
-		Contact(const Contact &other);
-		Contact& operator=(const Contact &other);
-		std::string	get_first_name(void);
-		std::string	get_last_name(void);
-		std::string	get_nick_name(void);
-		std::string	get_phone_number(void);
-		std::string	get_darkset_secret(void);
-		int			set_first_name(void);
-		int			set_last_name(void);
-		int			set_nick_name(void);
-		int			set_phone_number(void);
-		int			set_darkest_secret(void);
+		std::string	GetFirstName(void);
+		std::string	GetLastName(void);
+		std::string	GetNickName(void);
+		std::string	GetPhoneNumber(void);
+		std::string	GetDarkestSecret(void);
+		void				SetFirstName(const std::string &str);
+		void				SetLastName(const std::string &str);
+		void				SetNickName(const std::string &str);
+		void				SetPhoneNumber(const std::string &str);
+		void				SetDarkestSecret(const std::string &str);
+		const std::string	ReadLetter(void);
+		const std::string	ReadNumber(void);
+		int					IsValidLetter(const std::string &str);
+		int					IsValidNumber(const std::string &str);
 };
+
+
 
 #endif

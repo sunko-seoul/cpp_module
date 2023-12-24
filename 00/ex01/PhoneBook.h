@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:34 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/16 16:01:31 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 02:26:51 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@
 class PhoneBook
 {
 	private:
-		Contact contact[8];
-		int		valid[8];
+		Contact 		mContacts[8];
+		int				mValid[8];
 	public:
 		PhoneBook();
-		~PhoneBook();
-		PhoneBook(const PhoneBook &other);
-		PhoneBook& operator=(const PhoneBook &other);
-		void	Add(Contact &new_contact, int cnt);
-		void	Display(void);
-		void	Search_idx(int idx);
-		bool	isValid(int idx);
+		void			Add(const Contact &new_contact, const int cnt);
+		void			Display(PhoneBook &phoneBook);
+		void			SearchIdx(PhoneBook &phoneBook, const int idx);
+		bool			IsValid(const int idx);
+		void			SetValid(const int idx, const int value);
+		void			SetContact(const int idx, const Contact &contact);
+		int				GetValid(const int idx) const;
+		const Contact	GetContact(const int idx) const;
+		void			DisplayInfoRow(void) const;
+		void			DisplayContactRow(Contact contact, const int idx) const;
 };
 
 #endif

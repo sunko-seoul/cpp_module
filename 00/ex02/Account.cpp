@@ -1,4 +1,5 @@
 #include "Account.hpp"
+#include <ctime>
 #include <iostream>
 
 // static member function
@@ -21,7 +22,12 @@ int	Account::getNbWithdrawals(void) { return (_totalNbWithdrawals); }
 // 현재 시점으로 해야 하나?
 void	Account::_displayTimestamp(void)
 {
-	std::cout << "[19920104_091532] ";
+	time_t	now = time(0);
+	struct tm	*timeinfo = localtime(&now);
+	char	buff[80];
+	strftime(buff, sizeof(buff), "[%Y%m%d_%H%M%S] ", timeinfo);
+	std::string	str_time(buff);
+	std::cout << str_time;
 }
 
 Account::Account(int initial_deposit)

@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = megaphone
@@ -9,9 +9,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(VERSION) -o $@ $^
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) $(VERSION) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

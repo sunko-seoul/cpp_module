@@ -1,10 +1,10 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
-NAME = phonebook
-SRCS = Contact.cpp PhoneBook.cpp main.cpp
+NAME = tester
+SRCS = Account.cpp tests.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Contact.h PhoneBook.h
+HEADERS = Account.hpp
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:02:13 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/25 02:36:24 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 23:51:53 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	AddCmd(PhoneBook &MyBook, int &addCnt)
 	return 0;
 }
 
-
 int	main(void)
 {
 	PhoneBook	MyBook;
@@ -95,6 +94,7 @@ int	main(void)
 
 			MyBook.Display(MyBook);
 			std::cout << "please input index (1 ~ 8): ";
+
 			while (std::getline(std::cin, idx))
 			{
 				if (IsValidNumber(idx))
@@ -110,6 +110,12 @@ int	main(void)
 				}
 				else
 					std::cerr << "Index is only number" << std::endl;
+			}
+			if (std::cin.eof())
+			{
+				std::cerr << "EOF" << std::endl;
+				std::clearerr(stdin);
+				std::cin.clear();
 			}
 		}
 		else

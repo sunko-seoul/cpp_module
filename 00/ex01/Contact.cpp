@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:05:04 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/25 02:18:03 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/25 23:51:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ const std::string	Contact::ReadLetter(void)
 			std::cerr << "This type is consists of only alphabets" << std::endl;
 	}
 	std::cerr << "EOF" << std::endl;
+	if (std::cin.eof())
+	{
+		std::clearerr(stdin);
+		std::cin.clear();
+	}
 	return ("");
 }
 
@@ -130,6 +135,11 @@ const std::string	Contact::ReadNumber(void)
 		else
 			std::cerr << "This type is consists of only numbers" << std::endl;
 	}
-	std::cerr << "EOF" << std::endl;
+	if (std::cin.eof())
+	{
+		std::cerr << "EOF" << std::endl;
+		std::clearerr(stdin);
+		std::cin.clear();
+	}
 	return ("");
 }

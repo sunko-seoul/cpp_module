@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:15:02 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/20 22:37:23 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/26 23:11:58 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ std::string string_compare(const std::string &s1, const std::string &s2, std::st
 	std::string::size_type j = 0;
 	std::string::size_type s1_len = s1.length();
 	std::string::size_type s2_len = s2.length();
-	size_t find_idx = get_line.find(s1, 0);
+	size_t findIdx = get_line.find(s1, 0);
 
-	if (find_idx == std::string::npos)
+	if (findIdx == std::string::npos)
 		return get_line;
 
 	for (i = 0; i < get_line.length(); ++i, ++j)
@@ -47,43 +47,43 @@ int	main(int argc, char *argv[])
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage : a.out <filename> <string1> <string2>\n";
-		return 1;
+		std::cerr << "Usage : a.out <filename> <string1> <string2>" << std::endl;
+		return (1);
 	}
 
-	std::string file_name = argv[1];
-	std::string replace;
-	size_t find_idx = file_name.find('.', 0);
-	if (find_idx == std::string::npos)
-		replace = file_name + ".replace";
-	else
-	{
-		replace += file_name.substr(0, find_idx);
-		replace += ".replace";
-	}
+	std::string fileName = argv[1];
 	std::string s1 = argv[2];
 	std::string s2 = argv[3];
+	std::string replaceFileName;
+	size_t findIdx = fileName.find('.', 0);
+	if (findIdx == std::string::npos)
+		replaceFileName = fileName + ".replace";
+	else
+	{
+		replaceFileName += fileName.substr(0, findIdx);
+		replaceFileName += ".replace";
+	}
 
-	std::fstream iofile(file_name, std::ios::in | std::ios::out);
+	std::fstream iofile(fileName, std::ios::in | std::ios::out);
 	if (!iofile)
 	{
-		std::cerr << "Uh oh, file could not be opened!\n";
+		std::cerr << fileName << " could not be opened!" << std::endl;
 		return 1;
 	}
 
-	std::fstream replace_file (replace, std::ios::out);
-	if (!replace_file)
+	std::fstream replaceFile (replaceFileName, std::ios::out);
+	if (!replaceFile)
 	{
-		std::cerr << "Uh oh, file could not be opened!\n";
+		std::cerr << replaceFileName << " could not be opened!" << std::endl;
 		return 1;
 	}
 
 	std::string get_line;
 	while (std::getline(iofile, get_line))
 	{
-		replace_file << string_compare(s1, s2, get_line) << std::endl;
+		replaceFile << string_compare(s1, s2, get_line) << std::endl;
 	}
 	iofile.close();
-	replace_file.close();
+	replaceFile.close();
 	std::cout << "clear!" << std::endl;
 }

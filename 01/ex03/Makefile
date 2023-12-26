@@ -16,7 +16,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(VERSION) -o $@ $^
 
-%.o: %.cpp %.h
+$(OBJS): %.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) $(VERSION) -c $< -o $@
 
 clean:

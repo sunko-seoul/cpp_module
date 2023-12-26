@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:41:41 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/19 14:46:19 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/26 16:25:37 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,22 @@ Weapon::Weapon(const std::string& new_type)
 	Weapon::type = new_type;
 }
 
-const std::string& Weapon::getType(void)
+Weapon& Weapon::operator=(const Weapon& other)
+{
+	if (this != &other)
+	{
+		this->type = other.getType();
+	}
+	return *this;
+}
+
+const std::string& Weapon::getType(void) const
 {
 	return Weapon::type;
 }
 
 void	Weapon::setType(const std::string &new_type)
 {
-	Weapon::type = new_type;
+	this->type = new_type;
 }
 

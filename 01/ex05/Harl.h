@@ -6,12 +6,15 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:07:54 by sunko             #+#    #+#             */
-/*   Updated: 2023/10/20 23:09:06 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/27 23:29:35 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#ifndef HARL_H
+# define HARL_H
+
+# include <iostream>
+# include <string>
 
 class Harl
 {
@@ -25,3 +28,5 @@ public:
 	~Harl();
 	void	complain(std::string level);
 };
+
+#endif

@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = weapon

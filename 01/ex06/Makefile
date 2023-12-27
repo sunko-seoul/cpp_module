@@ -1,10 +1,11 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
-NAME = a.out
-SRCS = main.cpp
-
+NAME = harlFilter
+SRCS = main.cpp\
+	   Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
+HEADER = Harl.h
 
 all: $(NAME)
 

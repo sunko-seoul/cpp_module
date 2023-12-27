@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = Harl
@@ -12,7 +12,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(VERSION) -o $@ $^
 
-%.o: %.cpp $(HEADER)
+$(OBJS): %.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) $(VERSION) -c $< -o $@
 
 clean:

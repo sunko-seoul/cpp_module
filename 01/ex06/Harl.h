@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/27 23:19:09 by sunko            ###   ########.fr       */
+/*   Created: 2023/10/20 23:07:54 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/27 23:29:41 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.h"
+#ifndef HARL_H
+# define HARL_H
 
-int	main(void)
+# include <iostream>
+# include <string>
+
+class Harl
 {
-	Harl h;
+private:
+	void	dubug(void);
+	void	info(void);
+	void	warning(void);
+	void	error(void);
+public:
+	Harl();
+	~Harl();
+	void	complain(std::string level);
+};
 
-	h.complain("DEBUG");
-	h.complain("INFO");
-	h.complain("WARNING");
-	h.complain("ERROR");
-
-	return 0;
-}
+#endif

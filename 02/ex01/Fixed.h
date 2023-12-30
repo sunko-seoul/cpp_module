@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 00:23:49 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/30 17:18:36 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/31 01:29:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ class Fixed
 		int		getNumOfFractionBit(void) const;
 		float	toFloat(void) const;
 		int		toInt(void) const;
-
-	friend std::ostream&	operator<<(std::ostream& out, const Fixed& fixed);
 };
+
+std::ostream&	operator<<(std::ostream& out, const Fixed& fixed);
 
 #endif

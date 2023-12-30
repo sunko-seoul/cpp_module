@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 00:33:27 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/31 01:27:03 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/31 01:32:10 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Fixed::Fixed(const int intValue)
 Fixed::Fixed(const float floatValue)
 {
 	//std::cout << "Float constructor called" << std::endl;
-	mRawBits = (static_cast<int>(roundf(floatValue * (1 << mNumOfFractionBit))));
+	mRawBits = static_cast<int>(roundf(floatValue * (1 << mNumOfFractionBit)));
 }
 
 std::ostream&	operator<<(std::ostream& out, const Fixed& fixed)

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 00:33:27 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/30 21:11:36 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/31 01:34:48 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ Fixed::Fixed(const Fixed& copyFixed)
 	*this = copyFixed;
 }
 
-Fixed::Fixed(const int iRawBits)
+Fixed::Fixed(const int intValue)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(iRawBits << this->getNumOfFractionBit());
+	mRawBits = intValue << mNumOfFractionBit;
 }
 
-Fixed::Fixed(const float fRawBits)
+Fixed::Fixed(const float floatValue)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(static_cast<int>(roundf(fRawBits * (1 << this->getNumOfFractionBit()))));
+	mRawBits = static_cast<int>(roundf(floatValue * (1 << mNumOfFractionBit)));
 }
 
 std::ostream&	operator<<(std::ostream& out, const Fixed& fixed)
@@ -49,13 +49,12 @@ std::ostream&	operator<<(std::ostream& out, const Fixed& fixed)
 	return (out);
 }
 
-
 Fixed&	Fixed::operator=(const Fixed& copyFixed)
 {
 	if (this == &copyFixed)
 		return (*this);
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->setRawBits(copyFixed.getRawBits());
+	mRawBits = copyFixed.getRawBits();
 	return (*this);
 }
 
@@ -76,10 +75,10 @@ int	Fixed::getNumOfFractionBit(void) const
 
 float	Fixed::toFloat(void) const
 {
-	return (static_cast<float>(this->getRawBits()) / (1 << this->getNumOfFractionBit()));
+	return (static_cast<float>(mRawBits) / (1 << mNumOfFractionBit));
 }
 
 int	Fixed::toInt(void) const
 {
-	return (this->getRawBits() >> this->getNumOfFractionBit());
+	return (mRawBits >> mNumOfFractionBit);
 }

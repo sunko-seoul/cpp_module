@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 00:33:27 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/30 01:49:11 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/30 21:11:36 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ Fixed::Fixed(const Fixed& copyFixed)
 Fixed::Fixed(const int iRawBits)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(iRawBits);
+	this->setRawBits(iRawBits << this->getNumOfFractionBit());
 }
 
 Fixed::Fixed(const float fRawBits)
 {
-	int	mul = 1;
-
 	std::cout << "Float constructor called" << std::endl;
-	for (int i = 0; i < this->mNumOfFractionBit; ++i)
-		mul *= 10;
-	this->setRawBits(static_cast<int>(roundf(fRawBits * mul)));
+	this->setRawBits(static_cast<int>(roundf(fRawBits * (1 << this->getNumOfFractionBit()))));
 }
+
+std::ostream&	operator<<(std::ostream& out, const Fixed& fixed)
+{
+	out << static_cast<float>(fixed.getRawBits()) / (1 << fixed.getNumOfFractionBit());
+	return (out);
+}
+
 
 Fixed&	Fixed::operator=(const Fixed& copyFixed)
 {
@@ -58,7 +61,6 @@ Fixed&	Fixed::operator=(const Fixed& copyFixed)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->mRawBits);
 }
 
@@ -67,26 +69,17 @@ void	Fixed::setRawBits(int const raw)
 	this->mRawBits = raw;
 }
 
+int	Fixed::getNumOfFractionBit(void) const
+{
+	return (this->mNumOfFractionBit);
+}
+
 float	Fixed::toFloat(void) const
 {
-	float		floatingPointNumber;
-	int			divide = 1;
-
-	for (int i = 0; i < this->mNumOfFractionBit; ++i)
-		divide *= 10;
-
-	floatingPointNumber = static_cast<float>(this->getRawBits()) / divide;
-	return (floatingPointNumber);
+	return (static_cast<float>(this->getRawBits()) / (1 << this->getNumOfFractionBit()));
 }
 
 int	Fixed::toInt(void) const
 {
-	int		integerNumber;
-	int		divide = 1;
-
-	for (int i = 0; i < this->mNumOfFractionBit; ++i)
-		divide *= 10;
-
-	integerNumber = this->getRawBits() / divide;
-	return (integerNumber);
+	return (this->getRawBits() >> this->getNumOfFractionBit());
 }

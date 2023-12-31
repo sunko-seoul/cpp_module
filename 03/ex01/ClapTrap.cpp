@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:33:50 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 01:03:54 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 01:05:59 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ ClapTrap::ClapTrap(const std::string& name)
 {
 	std::cout << "ClapTrap constructor called" << std::endl;
 }
-
 
 ClapTrap::ClapTrap(const ClapTrap& source)
 	: mName(source.getName()),
@@ -46,7 +45,7 @@ ClapTrap&	ClapTrap::operator=(const ClapTrap& source)
 
 ClapTrap::~ClapTrap()
 {
-		std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)

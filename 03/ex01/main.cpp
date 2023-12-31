@@ -5,21 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 22:48:34 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 01:01:48 by sunko            ###   ########.fr       */
+/*   Created: 2024/01/01 00:25:25 by sunko             #+#    #+#             */
+/*   Updated: 2024/01/01 01:05:18 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.h"
+#include "ScavTrap.h"
 #include <string>
+#include <iostream>
 
 int	main(void)
 {
-	ClapTrap	player1("sunko");
-	ClapTrap	player2("guma");
+	ScavTrap	player1("sunko");
+	ScavTrap	player2("guma");
 
 	player1.attack("guma");
-	player2.takeDamage(player1.getAttackDamage());
-	player2.beRepaired(2);
+	player2.takeDamage(10);
+	player2.beRepaired(5);
+
+	player1.guardGate();
+	player1.guardGate();
+
 	return (0);
 }

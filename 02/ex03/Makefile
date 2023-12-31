@@ -1,11 +1,13 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 VERSION = -std=c++98
 NAME = a.out
 SRCS = main.cpp\
-	   Fixed.cpp
+	   Fixed.cpp\
+	   Point.cpp\
+	   bsp.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = Fixed.h
+HEADER = Fixed.h Point.h
 
 all: $(NAME)
 

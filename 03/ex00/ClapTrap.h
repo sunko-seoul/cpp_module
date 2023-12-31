@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:14:04 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/31 18:59:46 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/31 22:56:00 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ struct ClapTrap
 		ClapTrap(const ClapTrap& source);
 		ClapTrap&	operator=(const ClapTrap& source);
 		~ClapTrap();
-		void	attack(const std::string& target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
-		std::string	getName(void) const;
-		int			getHitPoints(void) const;
-		int			getEnergyPoint(void) const;
-		int			getAttackDamage(void) const;
+		void				attack(const std::string& target);
+		void				takeDamage(unsigned int amount);
+		void				beRepaired(unsigned int amount);
+		const std::string	getName(void) const;
+		int					getHitPoints(void) const;
+		int					getEnergyPoint(void) const;
+		int					getAttackDamage(void) const;
 };
 
 #endif

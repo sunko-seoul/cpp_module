@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:33:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/31 19:03:16 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/31 22:58:26 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,53 @@ ClapTrap&	ClapTrap::operator=(const ClapTrap& source)
 	return (*this);
 }
 
-std::string	ClapTrap::getName(void) const
+ClapTrap::~ClapTrap()
+{
+	std::cout << "Destructor called" << std::endl;
+}
+
+void	ClapTrap::attack(const std::string& target)
+{
+	if (this->getEnergyPoint() == 0 || this->getHitPoints() <= 0)
+	{
+		std::cout << "out of points, can't do anything" << std::endl;
+		return ;
+	}
+
+	mEnergyPoints -= 1;
+	std::cout << "ClapTrap " << this->getName()
+	<< " attack " << target << ", causing " << this->getAttackDamage()
+	<< " points of damage!" << std::endl;
+}
+
+void	ClapTrap::takeDamage(unsigned int amount)
+{
+	if (this->getEnergyPoint() == 0 || this->getHitPoints() <= 0)
+	{
+		std::cout << "out of points, can't do anything" << std::endl;
+		return ;
+	}
+
+	mHitPoints -= amount;
+	std::cout << this->getName() << " take a damage, "
+	<< "lose " << amount << " Hit points!" << std::endl;
+}
+
+void	ClapTrap::beRepaired(unsigned int amount)
+{
+	if (this->getEnergyPoint() == 0 || this->getHitPoints() <= 0)
+	{
+		std::cout << "out of points, can't do anything" << std::endl;
+		return ;
+	}
+
+	mEnergyPoints -= 1;
+	mHitPoints += amount;
+	std::cout << this->getName() << " be Repaired, "
+	<< "gets "<< amount << " hit points!" << std::endl;
+}
+
+const std::string	ClapTrap::getName(void) const
 {
 	return (mName);
 }
@@ -55,7 +101,7 @@ int	ClapTrap::getHitPoints(void) const
 
 int	ClapTrap::getEnergyPoint(void) const
 {
-	return (mEnergyPoints)
+	return (mEnergyPoints);
 }
 
 int	ClapTrap::getAttackDamage(void) const

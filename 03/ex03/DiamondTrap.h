@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.h                                         :+:      :+:    :+:   */
+/*   DiamondTrap.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 13:37:53 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 23:28:08 by sunko            ###   ########.fr       */
+/*   Created: 2024/01/01 17:00:27 by sunko             #+#    #+#             */
+/*   Updated: 2024/01/01 23:16:42 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_H
-# define FRAGTRAP_H
+#ifndef DIAMONDTRAP_H
+# define DIAMONDTRAP_H
 
-# include "ClapTrap.h"
 # include <string>
+# include "ScavTrap.h"
+# include "FragTrap.h"
 
-struct FragTrap : virtual public ClapTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 	private:
-		FragTrap();
+		std::string mName;
+		DiamondTrap();
 	public:
-		FragTrap(const std::string& name);
-		FragTrap(const FragTrap& source);
-		FragTrap&	operator=(const FragTrap& source);
-		~FragTrap();
-		void	highFivesGuys(void);
-		static const int	HIT_POINT;
-		static const int	ENERGY_POINT;
-		static const int	ATTACK_DAMAGE;
+		DiamondTrap(const std::string& name);
+		DiamondTrap(const DiamondTrap& source);
+		DiamondTrap&	operator=(const DiamondTrap& sourec);
+		~DiamondTrap();
+		void	whoAmI();
 };
 
 #endif

@@ -6,12 +6,16 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:33:50 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 01:05:59 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 23:30:57 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.h"
 #include <iostream>
+
+const int	ClapTrap::HIT_POINT = 10;
+const int	ClapTrap::ENERGY_POINT = 10;
+const int	ClapTrap::ATTACK_DAMAGE = 0;
 
 ClapTrap::ClapTrap(const std::string& name)
 	: mName(name),

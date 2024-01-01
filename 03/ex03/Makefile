@@ -2,11 +2,13 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = a.out
-SRCS = main.cpp\
-	   ClapTrap.cpp\
-	   FragTrap.cpp
+SRCS = main.cpp \
+	   ClapTrap.cpp \
+	   FragTrap.cpp \
+	   ScavTrap.cpp \
+	   DiamondTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = ClapTrap.h FragTrap.h
+HEADER = ClapTrap.h FragTrap.h ScavTrap.cpp DiamondTrap.h
 
 all: $(NAME)
 

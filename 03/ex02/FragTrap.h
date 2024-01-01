@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.h                                         :+:      :+:    :+:   */
+/*   FragTrap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 23:35:27 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 13:40:42 by sunko            ###   ########.fr       */
+/*   Created: 2024/01/01 13:37:53 by sunko             #+#    #+#             */
+/*   Updated: 2024/01/01 14:05:50 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_H
-# define SCAVTRAP_H
+#ifndef FRAGTRAP_H
+# define FRAGTRAP_H
 
 # include "ClapTrap.h"
 # include <string>
 
-class ScavTrap : public ClapTrap
+struct FragTrap : public ClapTrap
 {
 	private:
-		bool	gateKeeperMode;
-		ScavTrap();
+		FragTrap();
 	public:
-		ScavTrap(const std::string& name);
-		ScavTrap(const ScavTrap& source);
-		ScavTrap&	operator=(const ScavTrap& source);
-		~ScavTrap();
+		FragTrap(const std::string& name);
+		FragTrap(const FragTrap& source);
+		FragTrap&	operator=(const FragTrap& source);
+		~FragTrap();
 		void	attack(const std::string& target);
-		void	guardGate();
+		void	highFivesGuys(void);
 };
 
 #endif

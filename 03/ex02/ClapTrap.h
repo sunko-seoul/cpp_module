@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:14:04 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 13:40:34 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 01:04:29 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CLAPTRAP_H
 
 # include <iostream>
-# include <string>
 
 struct ClapTrap
 {

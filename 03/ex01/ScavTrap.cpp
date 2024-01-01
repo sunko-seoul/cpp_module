@@ -6,12 +6,16 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 23:51:23 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 14:15:59 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 23:51:20 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.h"
 #include <iostream>
+
+const int	ScavTrap::HIT_POINT = 100;
+const int	ScavTrap::ENERGY_POINT = 50;
+const int	ScavTrap::ATTACK_DAMAGE = 20;
 
 ScavTrap::ScavTrap(const std::string &name)
 	: ClapTrap(name)

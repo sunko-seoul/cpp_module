@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:14:04 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 01:03:48 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 23:50:18 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ struct ClapTrap
 		void				setHitPoints(const int hitPoints);
 		void				setEnergyPoints(const int energyPoints);
 		void				setAttackDamage(const int attackDamage);
+		static const int	HIT_POINT;
+		static const int	ENERGY_POINT;
+		static const int	ATTACK_DAMAGE;
 };
 
 #endif

@@ -6,13 +6,17 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 13:42:55 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 14:17:35 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 23:52:45 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.h"
 #include <iostream>
 #include <string>
+
+const int	FragTrap::HIT_POINT = 100;
+const int	FragTrap::ENERGY_POINT = 100;
+const int	FragTrap::ATTACK_DAMAGE = 30;
 
 FragTrap::FragTrap(const std::string &name)
 	: ClapTrap(name)
@@ -42,20 +46,6 @@ FragTrap&	FragTrap::operator=(const FragTrap& source)
 	this->setEnergyPoints(source.getEnergyPoints());
 	this->setAttackDamage(source.getAttackDamage());
 	return (*this);
-}
-
-void	FragTrap::attack(const std::string& target)
-{
-	if (this->getEnergyPoints() == 0 || this->getHitPoints() <= 0)
-	{
-		std::cout << "out of points, can't do anything" << std::endl;
-		return ;
-	}
-
-	this->setEnergyPoints(this->getEnergyPoints() - 1);
-	std::cout << "FrapTrap " << this->getName()
-	<< " attack " << target << ", causing " << this->getAttackDamage()
-	<< " points of damage!" << std::endl;
 }
 
 FragTrap::~FragTrap()

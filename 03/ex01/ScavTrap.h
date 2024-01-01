@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 23:35:27 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/01 13:40:42 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/01 23:51:01 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ClapTrap.h"
 # include <string>
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	private:
 		bool	gateKeeperMode;
@@ -28,6 +28,9 @@ class ScavTrap : public ClapTrap
 		~ScavTrap();
 		void	attack(const std::string& target);
 		void	guardGate();
+		static const int	HIT_POINT;
+		static const int	ENERGY_POINT;
+		static const int	ATTACK_DAMAGE;
 };
 
 #endif

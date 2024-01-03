@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:39:45 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 12:28:33 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:26:05 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ Dog::Dog()
 	: Animal("Dog")
 {
 	std::cout << "Dog defualt constructor called" << std::endl;
+	mBrainP = new Brain;
 }
 
 Dog::Dog(const Dog& src)
 	: Animal(src)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
-	this->mType = src.mType;
+	mType = src.mType;
+	mBrainP = new Brain(*src.mBrainP);
 }
 
 Dog&	Dog::operator=(const Dog& src)
@@ -38,6 +40,7 @@ Dog&	Dog::operator=(const Dog& src)
 Dog::~Dog()
 {
 	std::cout << "Dog defualt copy destructor" << std::endl;
+	delete mBrainP;
 }
 
 void	Dog::makeSound() const

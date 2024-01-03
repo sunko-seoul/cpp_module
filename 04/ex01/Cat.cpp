@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:53:06 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 12:28:11 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:26:02 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ Cat::Cat()
 	: Animal("Cat")
 {
 	std::cout << "Cat defulat constructor called" << std::endl;
+	mBrainP = new Brain;
 }
 
 Cat::Cat(const Cat& src)
@@ -24,6 +25,7 @@ Cat::Cat(const Cat& src)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	mType = src.mType;
+	mBrainP = new Brain(*src.mBrainP);
 }
 
 Cat&	Cat::operator=(const Cat& src)
@@ -38,6 +40,7 @@ Cat&	Cat::operator=(const Cat& src)
 Cat::~Cat()
 {
 	std::cout << "Cat defulat destructor called" << std::endl;
+	delete mBrainP;
 }
 
 void	Cat::makeSound() const

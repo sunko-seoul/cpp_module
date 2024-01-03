@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:26:37 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 14:35:18 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:25:03 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,15 @@ Brain&	Brain::operator=(const Brain& src)
 		return (*this);
 	for (int i = 0; i < 100; ++i)
 		ideas[i] = src.ideas[i];
+	return (*this);
+}
+
+const std::string&	Brain::getIdeas(void) const
+{
+	return (*ideas);
+}
+
+void	Brain::setIdeas(const std::string& src, const int i)
+{
+	ideas[i] = src;
 }

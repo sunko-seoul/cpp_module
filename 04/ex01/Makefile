@@ -6,10 +6,9 @@ SRCS = main.cpp \
 	   Animal.cpp \
 	   Cat.cpp \
 	   Dog.cpp \
-	   WrongAnimal.cpp \
-	   WrongCat.cpp
+	   Brain.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = Animal.h Cat.h Dog.h WrongAnimal.h WrongCat.h
+HEADER = Animal.h Cat.h Dog.h Brain.cpp
 
 all: $(NAME)
 

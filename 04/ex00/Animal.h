@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 00:29:26 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/03 12:26:13 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ class Animal
 		Animal(const Animal& src);
 		Animal&	operator=(const Animal& src);
 		virtual	~Animal();
-		virtual void	makeSound();
+		virtual void	makeSound() const;
+		const std::string&	getType(void) const;
 };
 
 #endif

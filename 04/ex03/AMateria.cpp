@@ -6,11 +6,15 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:25:06 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 12:36:24 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 16:08:43 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.h"
+#include <iostream>
+
+AMateria::AMateria()
+{}
 
 AMateria::AMateria(std::string const & type)
 	: mType(type)
@@ -34,4 +38,9 @@ AMateria&	AMateria::operator=(const AMateria& src)
 std::string const &AMateria::getType() const
 {
 	return (this->mType);
+}
+
+void	AMateria::use(ICharacter& target)
+{
+	std::cout << "this is abstruct" << std::endl;
 }

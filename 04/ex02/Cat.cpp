@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:53:06 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 16:08:22 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/05 02:05:47 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ Cat&	Cat::operator=(const Cat& src)
 	if (this == &src)
 		return (*this);
 	this->mType = src.mType;
+	*mBrainP = *src.mBrainP;
 	return (*this);
 }
 

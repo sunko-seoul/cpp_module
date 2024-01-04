@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:33:16 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 23:24:02 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/05 02:14:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,16 @@ Character::Character()
 {}
 
 Character::Character(const std::string& name)
-	: mName(name)
-{
-	for (int i = 0; i < 4; ++i)
-		mSlot[i] = 0;
-}
+	: mName(name), mSlot()
+{}
 
 Character::Character(const Character& src)
-	: mName(src.mName)
+	: mName(src.mName), mSlot()
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		if (mSlot[i])
-			delete mSlot[i];
-		mSlot[i] = 0;
-		mSlot[i] = src.mSlot[i];
+		if (src.mSlot[i])
+			mSlot[i] = src.mSlot[i]->clone();
 	}
 }
 
@@ -44,8 +39,8 @@ Character&	Character::operator=(const Character& src)
 	{
 		if (mSlot[i])
 			delete mSlot[i];
-		mSlot[i] = 0;
-		mSlot[i] = src.mSlot[i];
+		if (src.mSlot[i])
+		mSlot[i] = src.mSlot[i]->clone();
 	}
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:50:33 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 23:25:21 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/05 02:18:40 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ MateriaSource::~MateriaSource()
 }
 
 MateriaSource::MateriaSource(const MateriaSource& src)
+	: mSourceSlot()
 {
 	for (int i = 0; i < 4; ++i)
 	{
 		if (mSourceSlot[i])
-		{
-			delete mSourceSlot[i];
-			mSourceSlot[i] = 0;
-		}
-		mSourceSlot[i] = src.mSourceSlot[i];
+			mSourceSlot[i] = mSourceSlot[i]->clone();
 	}
 }
 
@@ -50,11 +47,9 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& src)
 	for (int i = 0; i < 4; ++i)
 	{
 		if (mSourceSlot[i])
-		{
 			delete mSourceSlot[i];
-			mSourceSlot[i] = 0;
-		}
-		mSourceSlot[i] = src.mSourceSlot[i];
+		if (src.mSourceSlot[i])
+			mSourceSlot[i] = src.mSourceSlot[i]->clone();
 	}
 	return (*this);
 }
@@ -77,7 +72,7 @@ AMateria*	MateriaSource::createMateria(std::string const &type)
 	int i = 0;
 	for (; i < 4; ++i)
 	{
-		if (mSourceSlot[i]->getType() == type)
+		if (mSourceSlot[i] && mSourceSlot[i]->getType() == type)
 			break ;
 	}
 	if (i == 4)

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:25:06 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 16:08:43 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:24:43 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ std::string const &AMateria::getType() const
 
 void	AMateria::use(ICharacter& target)
 {
-	std::cout << "this is abstruct" << std::endl;
+	std::cout << "this is abstruct Materia class (" << target.getName() << ")" << std::endl;
 }

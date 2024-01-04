@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:11:54 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 21:31:54 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:09:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <string>
 # include "AMateria.h"
+
+class AMateria;
+class Character;
 
 class ICharacter
 {

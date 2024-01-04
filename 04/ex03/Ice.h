@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:51:52 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 16:17:08 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 22:49:18 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 class Ice : public AMateria
 {
 	private:
-		Ice();
 	public:
+		Ice();
 		Ice(std::string const & type);
 		Ice(const Ice& src);
 		~Ice();

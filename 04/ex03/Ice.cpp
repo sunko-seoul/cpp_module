@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:53:43 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 16:36:59 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:12:46 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 
 Ice::Ice()
+	: AMateria("ice")
 {}
 
 Ice::Ice(std::string const & type)
@@ -38,6 +39,7 @@ Ice&	Ice::operator=(const Ice& src)
 		mType = src.mType;
 	else
 		mType = "ice";
+	return (*this);
 }
 
 Ice::~Ice()

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:50:33 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 22:11:22 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:25:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& src)
 		}
 		mSourceSlot[i] = src.mSourceSlot[i];
 	}
+	return (*this);
 }
 
 void	MateriaSource::learnMateria(AMateria* materia)

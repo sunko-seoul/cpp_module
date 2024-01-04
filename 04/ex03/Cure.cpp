@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:45:29 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 16:35:14 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:12:35 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 
 Cure::Cure()
+	: AMateria("cure")
 {}
 
 Cure::Cure(std::string const & type)
@@ -38,6 +39,7 @@ Cure&	Cure::operator=(const Cure& src)
 		mType = src.mType;
 	else
 		mType = "cure";
+	return (*this);
 }
 
 Cure::~Cure()

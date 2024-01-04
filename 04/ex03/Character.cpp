@@ -6,11 +6,12 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:33:16 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/04 17:09:11 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/04 23:24:02 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.h"
+#include "SmartPointer.h"
 
 Character::Character()
 {}
@@ -46,10 +47,18 @@ Character&	Character::operator=(const Character& src)
 		mSlot[i] = 0;
 		mSlot[i] = src.mSlot[i];
 	}
+	return (*this);
 }
 
 Character::~Character()
-{}
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (mSlot[i])
+			delete mSlot[i];
+		mSlot[i] = 0;
+	}
+}
 
 std::string const & Character::getName() const
 {
@@ -73,11 +82,22 @@ void	Character::equip(AMateria *m)
 
 void	Character::unequip(int idx)
 {
-
+	if (mSlot[idx])
+	{
+		SmartPointer(this->getMateria(idx));
+		mSlot[idx] = 0;
+	}
+	else
+		return ;
 }
 
 void	Character::use(int idx, ICharacter& target)
 {
 	if (mSlot[idx])
 		mSlot[idx]->use(target);
+}
+
+AMateria *Character::getMateria(int idx) const
+{
+	return (mSlot[idx]);
 }

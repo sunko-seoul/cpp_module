@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:39:45 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/03 15:26:05 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/05 02:03:39 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ Dog&	Dog::operator=(const Dog& src)
 	if (this == &src)
 		return (*this);
 	this->mType = src.mType;
+	*mBrainP = *src.mBrainP;
 	return (*this);
 }
 

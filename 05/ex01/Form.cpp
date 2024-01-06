@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 01:26:01 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/06 02:21:29 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/06 21:44:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,29 @@ const std::string	Form::getFormName() const
 	return (mFormName);
 }
 
-const bool			Form::getSigned() const
+bool			Form::getSigned() const
 {
 	return (mSign);
 }
 
-const int			Form::getRequiredSignGrade() const
+int			Form::getRequiredSignGrade() const
 {
 	return (mRequiredSignGrade);
 }
 
-const int			Form::getRequiredExecuteGrade() const
+int			Form::getRequiredExecuteGrade() const
 {
 	return (mRequiredExecuteGrade);
 }
 
 const char * Form::GradeTooHighException::what() const _NOEXCEPT
 {
-	return ("Form grade is too high!");
+	return ("grade is too high!");
 }
 
 const char * Form::GradeTooLowException::what() const _NOEXCEPT
 {
-	return ("Form grade is too low!");
+	return ("grade is too low!");
 }
 
 void	Form::beSigned(const Bureaucrat& rhs)
@@ -98,5 +98,6 @@ std::ostream&	operator<<(std::ostream& os, const Form& rhs)
 	<< "signed(1 or 0) : " << rhs.getSigned() << std::endl
 	<< "required to sign it grade : " << rhs.getRequiredSignGrade() << std::endl
 	<< "required to execute it grade : " << rhs.getRequiredExecuteGrade() << std::endl;
+	return (os);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 01:17:28 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/06 02:19:51 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/06 21:39:17 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <string>
 # include <iostream>
 # include <exception>
+
+class Bureaucrat;
 
 class Form
 {
@@ -32,9 +34,9 @@ class Form
 		Form(const Form& rhs);
 		~Form();
 		const std::string	getFormName() const;
-		const bool			getSigned() const;
-		const int			getRequiredSignGrade() const;
-		const int			getRequiredExecuteGrade() const;
+		bool				getSigned() const;
+		int					getRequiredSignGrade() const;
+		int					getRequiredExecuteGrade() const;
 		class GradeTooHighException : public std::exception
 		{
 			public:

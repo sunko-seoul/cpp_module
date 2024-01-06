@@ -3,9 +3,10 @@ CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = a.out
 SRCS = main.cpp \
-	   BureauCrat.cpp
+	   BureauCrat.cpp \
+	   Form.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = BureauCrat.h
+HEADER = BureauCrat.h Form.h
 
 all: $(NAME)
 

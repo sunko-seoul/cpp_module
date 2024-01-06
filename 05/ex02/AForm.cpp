@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 23:16:01 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/07 00:27:34 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 00:52:35 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ const char * AForm::GradeTooHighException::what() const _NOEXCEPT
 const char * AForm::GradeTooLowException::what() const _NOEXCEPT
 {
 	return ("Form grade is too low!");
+}
+
+const char * AForm::EmptySignException::what() const _NOEXCEPT
+{
+	return ("no sign on this form");
 }
 
 

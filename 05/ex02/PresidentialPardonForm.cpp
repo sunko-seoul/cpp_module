@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:22:10 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/07 00:42:40 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 00:53:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
 	if (!this->getSigned())
-		throw EmptySignException();
+		throw AForm::EmptySignException();
 	if (executor.getGrade() > this->getRequiredExecuteGrade())
 		throw Bureaucrat::GradeTooLowException();
 	this->infoPardon();

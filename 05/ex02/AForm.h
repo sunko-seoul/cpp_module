@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 23:04:21 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/06 23:36:17 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 00:49:20 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ class AForm
 				const char *what() const _NOEXCEPT;
 		};
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const _NOEXCEPT;
+		};
+		class	EmptySignException : public std::exception
 		{
 			public:
 				const char *what() const _NOEXCEPT;

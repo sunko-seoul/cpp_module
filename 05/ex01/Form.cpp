@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 01:26:01 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/06 21:44:21 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 15:48:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int			Form::getRequiredExecuteGrade() const
 	return (mRequiredExecuteGrade);
 }
 
-const char * Form::GradeTooHighException::what() const _NOEXCEPT
+const char * Form::GradeTooHighException::what() const throw()
 {
 	return ("grade is too high!");
 }
 
-const char * Form::GradeTooLowException::what() const _NOEXCEPT
+const char * Form::GradeTooLowException::what() const throw()
 {
 	return ("grade is too low!");
 }

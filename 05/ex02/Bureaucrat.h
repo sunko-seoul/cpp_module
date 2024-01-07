@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 23:39:33 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/07 00:38:24 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 15:48:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ class Bureaucrat
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				const char *what() const _NOEXCEPT;
+				const char *what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				const char *what() const _NOEXCEPT;
+				const char *what() const throw();
 		};
 		void	signForm(AForm& form) const;
 		void	executeForm(const AForm& form);

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 23:42:04 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/07 13:23:08 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/07 15:48:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ void	Bureaucrat::decreaseGrade()
 		throw GradeTooLowException();
 }
 
-const char * Bureaucrat::GradeTooHighException::what() const _NOEXCEPT
+const char * Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Bureaucrat grade is too height!");
 }
 
-const char * Bureaucrat::GradeTooLowException::what() const _NOEXCEPT
+const char * Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Bureaucrat grade is too low!");
 }

@@ -7,13 +7,15 @@ SRCS = main.cpp \
 	   AForm.cpp \
 	   ShrubberyCreationForm.cpp \
 	   RobotomyRequestForm.cpp \
-	   PresidentialPardonForm.cpp
+	   PresidentialPardonForm.cpp \
+	   Intern.cpp
 OBJS = $(SRCS:.cpp=.o)
 HEADER = BureauCrat.h \
 		 AForm.h \
 		 ShrubberyCreationForm.h \
 		 RobotomyRequestForm.h \
-		 PresidentialPardonForm.h
+		 PresidentialPardonForm.h \
+		 Intern.h
 
 all: $(NAME)
 

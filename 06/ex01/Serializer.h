@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:59:34 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/08 11:11:33 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/08 11:18:25 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 class Serializer
 {
 	private:
+		int	mData;
 		Serializer();
 		Serializer(const Serializer& rhs);
 		Serializer&	operator=(const Serializer& rhs);

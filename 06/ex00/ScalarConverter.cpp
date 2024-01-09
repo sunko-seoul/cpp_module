@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 23:48:38 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/09 23:54:36 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int		ScalarConverter::detectType(std::string s)
 	}
 	if (s == "nan" || s == "nanf")
 		return (NOT_NUMBER);
-	if (s == "-inff" || s == "+inff" || s == "-inf" || s == "inf")
+	if (s == "-inff" || s == "+inff" || s == "-inf" || s == "+inf")
 		return (INF);
 	return (ERROR);
 }
@@ -217,5 +217,13 @@ void	ScalarConverter::convert(std::string s)
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: nanf" << std::endl;
 		std::cout << "double: nan" << std::endl;
+	}
+	else if (type == INF)
+	{
+		trimStr.erase(trimStr.begin() + 4);
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << trimStr + "f" << std::endl;
+		std::cout << "double: " << trimStr << std::endl;
 	}
 }

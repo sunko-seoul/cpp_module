@@ -1,30 +1,17 @@
 #include <iostream>
-#include <cstdlib>
 #include <limits>
 
-bool tryParseInt(const std::string& str, int& result) {
-    char* end;
-    long longValue = std::strtol(str.c_str(), &end, 10);
-
-    // 변환 성공 여부 및 전체 문자열 변환이 완료되었는지 확인
-	std::cout << longValue << std::endl;
-    if (*end == '\0' && longValue >= std::numeric_limits<int>::min() && longValue <= std::numeric_limits<int>::max()) {
-        result = static_cast<int>(longValue);
-        return true;
-    } else {
-        return false;
-    }
-}
-
 int main() {
-    std::string str = "sdsadsa";
-    int result;
 
-    if (tryParseInt(str, result)) {
-        std::cout << "Converted integer: " << result << std::endl;
-    } else {
-        std::cerr << "Overflow or invalid argument occurred." << std::endl;
-    }
+    float a = 3.40282e+40;
+    if (a > std::numeric_limits<float>::min())
+        std::cout << "overflow" << std::endl;
+    std::cout << "Minimum value of float: " << std::numeric_limits<float>::min() << std::endl;
+    std::cout << "Maximum value of float: " << std::numeric_limits<float>::max() << std::endl;
+
+    int c = 2147483648;
+    if (c > std::numeric_limits<int>::max())
+            std::cout << "int overflow" << std::endl;
 
     return 0;
 }

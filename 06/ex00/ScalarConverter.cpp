@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 12:14:55 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/09 17:23:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #include <cctype>
 #include <cstdlib>
 #include <limits>
+#include <sstream>
 #define	CHAR		0
 #define	INT			1
 #define	FLOAT		2
 #define	DOUBLE		3
-#define NAN			4
+#define NOT_NUMBER	4
 #define INF			5
-#define LONG LONG	6
+#define LONGLONG	6
 #define ERROR		7
 
 // 1. detect the type of the literal passed parameter.
@@ -58,15 +59,18 @@ bool	ScalarConverter::tryParseChar(const std::string& s)
 }
 
 // detect the type of the literal passed parameter.
-int		ScalarConverter::detectType(sted::string s)
+int		ScalarConverter::detectType(std::string s)
 {
-	if (tryParseInt(s))
+	if (tryParseChar(s))
 		return (CHAR);
-	else if (str.find('.') != std::string::npos)
+	else if (s.find('.') != std::string::npos)
 	{
-
+		if (s.back() == 'f')
+			return (FLOAT);
+		else
+			return (DOUBLE);
 	}
-	else if (str.find('.') == std::string::npos)
+	else if (s.find('.') == std::string::npos)
 	{
 		long long llValue;
 		if (tryParseInt(s, llValue))
@@ -74,13 +78,14 @@ int		ScalarConverter::detectType(sted::string s)
 			if (llValue >= std::numeric_limits<int>::min() && llValue <= std::numeric_limits<int>::max())
 				return (INT);
 			else
-				return (LONG LONG);
+				return (LONGLONG);
 		}
 	}
 	else if (s == "nan" || s == "nanf")
-		return (NAN);
+		return (NOT_NUMBER);
 	else if (s == "-inff" || s == "+inff" || s == "-inf" || s == "inf")
 		return (INF);
+	return (ERROR);
 }
 
 std::string	ScalarConverter::trimWhiteSpace(const std::string& s)
@@ -99,7 +104,47 @@ void	ScalarConverter::convert(std::string s)
 {
 	ScalarConverter	converter;
 	std::string trimStr = converter.trimWhiteSpace(s);
-	std::cout << trimStr << std::endl;
+	int	type = converter.detectType(trimStr);
 
-
+	if (type == CHAR)
+	{
+		char charValue = static_cast<char>(trimStr[0]);
+		std::cout << "charValue = " << charValue << std::endl;
+		// convertCharToOtherType()
+	}
+	else if (type == INT)
+	{
+		int intValue = std::atoi(trimStr.c_str());
+		std::cout << "intValue = " << intValue << std::endl;
+		// convertIntToOtherType()
+	}
+	else if (type == FLOAT)
+	{
+		std::cout << "trimStr = " << trimStr << std::endl;
+		if (trimStr.back() == 'f' || trimStr.back() == 'F')
+			trimStr.pop_back();
+		std::stringstream	ssf(trimStr);
+		float floatValue;
+		ssf >> floatValue;
+		if (!ssf.fail() && \
+		(floatValue > std::numeric_limits<float>::max() || floatValue < std::numeric_limits<float>::min()))
+		{
+			// handle overflow
+		}
+		std::cout << "floatValue = " << floatValue << "f" << std::endl;
+		// convertFloatToOtherType()
+	}
+	else if (type == DOUBLE)
+	{
+		std::stringstream	ssd(trimStr);
+		double doubleValue;
+		ssd >> doubleValue;
+		if (!ssd.fail() && \
+		(doubleValue > std::numeric_limits<double>::max() || doubleValue < std::numeric_limits<double>::min()))
+		{
+			// handle overflow
+		}
+		std::cout << "doubleValue = " << doubleValue << std::endl;
+		// convertDoubleToOtherType()
+	}
 }

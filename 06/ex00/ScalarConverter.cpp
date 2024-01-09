@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 17:23:44 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/09 22:44:32 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <limits>
 #include <sstream>
+#include <locale>
 #define	CHAR		0
 #define	INT			1
 #define	FLOAT		2
@@ -37,6 +38,31 @@ ScalarConverter::ScalarConverter()
 ScalarConverter::~ScalarConverter()
 {}
 
+void	ScalarConverter::printIntTotherType(int value)
+{
+	char	charType = static_cast<char>(value);
+	std::cout << "char: ";
+	if (std::isprint(charType))
+		std::cout <<  charType << std::endl;
+	else
+		std::cout << "Non displayable" << std::endl;
+	std::cout <<"int: " << value << std::endl;
+	std::cout << "float: " << static_cast<float>(value) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(value) << ".0" << std::endl;
+}
+
+void	ScalarConverter::printCharToOtherType(char value)
+{
+	std::cout << "char: ";
+	if (!std::isprint(value))
+		std::cout << "Non displayable" << std::endl;
+	else
+		std::cout << value << std::endl;
+	std::cout << "int: " << static_cast<int>(value) << std::endl;
+	std::cout << "float: " << static_cast<float>(value) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(value) << ".0" << std::endl;
+}
+
 bool	ScalarConverter::tryParseInt(const std::string& s, long long& result)
 {
 	char*	end;
@@ -53,7 +79,9 @@ bool	ScalarConverter::tryParseChar(const std::string& s)
 	if (s.length() == 1)
 	{
 		char charType = static_cast<char>(s[0]);
-		return (charType >= 0 && charType <= 127);
+		if ((charType >= 0 && charType <= 127) \
+		&& !(charType >= 48 && charType <= 57))
+			return (true);
 	}
 	return (false);
 }
@@ -109,14 +137,12 @@ void	ScalarConverter::convert(std::string s)
 	if (type == CHAR)
 	{
 		char charValue = static_cast<char>(trimStr[0]);
-		std::cout << "charValue = " << charValue << std::endl;
-		// convertCharToOtherType()
+		converter.printCharToOtherType(charValue);
 	}
 	else if (type == INT)
 	{
 		int intValue = std::atoi(trimStr.c_str());
-		std::cout << "intValue = " << intValue << std::endl;
-		// convertIntToOtherType()
+		converter.printIntTotherType(intValue);
 	}
 	else if (type == FLOAT)
 	{

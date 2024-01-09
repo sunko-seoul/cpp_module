@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:30:48 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 22:38:53 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/09 23:40:02 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ class ScalarConverter
 		std::string	trimWhiteSpace(const std::string& s);
 		int			detectType(std::string s);
 		bool		tryParseChar(const std::string& s);
-		bool		tryParseInt(const std::string&s, long long& result);
+		bool		tryParseInt(const std::string&s);
 		void		printCharToOtherType(char value);
-		void		printIntTotherType(int value);
+		void		printIntTotherType(long long value);
+		void		printFloatToOtherType(double value);
 	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& rhs);

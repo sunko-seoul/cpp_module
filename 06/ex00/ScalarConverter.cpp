@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 22:44:32 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/09 23:41:30 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #define	DOUBLE		3
 #define NOT_NUMBER	4
 #define INF			5
-#define LONGLONG	6
 #define ERROR		7
 
 // 1. detect the type of the literal passed parameter.
@@ -38,17 +37,75 @@ ScalarConverter::ScalarConverter()
 ScalarConverter::~ScalarConverter()
 {}
 
-void	ScalarConverter::printIntTotherType(int value)
+void	ScalarConverter::printFloatToOtherType(double value)
 {
-	char	charType = static_cast<char>(value);
+	/* char */
 	std::cout << "char: ";
-	if (std::isprint(charType))
-		std::cout <<  charType << std::endl;
+	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
+			std::cout << "Overflow" << std::endl;
 	else
-		std::cout << "Non displayable" << std::endl;
-	std::cout <<"int: " << value << std::endl;
-	std::cout << "float: " << static_cast<float>(value) << ".0f" << std::endl;
-	std::cout << "double: " << static_cast<double>(value) << ".0" << std::endl;
+	{
+		char charType = static_cast<char>(value);
+		if (std::isprint(charType))
+			std::cout <<  charType << std::endl;
+		else
+			std::cout << "Non displayable" << std::endl;
+	}
+
+	/* int */
+	std::cout << "int: ";
+	if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+		std::cout << "Overflow" << std::endl;
+	else
+		std::cout << static_cast<int>(value) << std::endl;
+
+	/* float */
+	std::cout << "float: ";
+	if (value < std::numeric_limits<float>::min() || value > std::numeric_limits<float>::max())
+		std::cout << "Overflow" << std::endl;
+	else
+		std::cout << value << "f" <<  std::endl;
+
+	/* double */
+	std::cout << "double: ";
+	if (value < std::numeric_limits<double>::min() || value > std::numeric_limits<double>::max())
+		std::cout << "Overflow" << std::endl;
+	else
+		std::cout << value << std::endl;
+}
+
+void	ScalarConverter::printIntTotherType(long long value)
+{
+	/* char */
+	std::cout << "char: ";
+	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
+			std::cout << "Overflow" << std::endl;
+	else
+	{
+		char charType = static_cast<char>(value);
+		if (std::isprint(charType))
+			std::cout <<  charType << std::endl;
+		else
+			std::cout << "Non displayable" << std::endl;
+	}
+
+	/* int */
+	std::cout << "int: ";
+	if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+		std::cout << "Overflow" << std::endl;
+	else
+		std::cout << value << std::endl;
+
+	/* float */
+	double	doubleValue = static_cast<double>(value);
+	std::cout << "float: ";
+	if (doubleValue < std::numeric_limits<float>::min() || doubleValue > std::numeric_limits<float>::max())
+		std::cout << "Overflow" << std::endl;
+	else
+		std::cout << doubleValue << ".0f" << std::endl;
+
+	/* double */
+	std::cout << "double: " << doubleValue << ".0" << std::endl;
 }
 
 void	ScalarConverter::printCharToOtherType(char value)
@@ -63,11 +120,11 @@ void	ScalarConverter::printCharToOtherType(char value)
 	std::cout << "double: " << static_cast<double>(value) << ".0" << std::endl;
 }
 
-bool	ScalarConverter::tryParseInt(const std::string& s, long long& result)
+bool	ScalarConverter::tryParseInt(const std::string& s)
 {
 	char*	end;
-	result = std::strtol(s.c_str(), &end, 10);
 
+	std::strtoll(s.c_str(), &end, 10);
 	if (*end == '\0')
 		return (true);
 	else
@@ -100,14 +157,8 @@ int		ScalarConverter::detectType(std::string s)
 	}
 	else if (s.find('.') == std::string::npos)
 	{
-		long long llValue;
-		if (tryParseInt(s, llValue))
-		{
-			if (llValue >= std::numeric_limits<int>::min() && llValue <= std::numeric_limits<int>::max())
-				return (INT);
-			else
-				return (LONGLONG);
-		}
+		if (tryParseInt(s))
+			return (INT);
 	}
 	else if (s == "nan" || s == "nanf")
 		return (NOT_NUMBER);
@@ -141,36 +192,23 @@ void	ScalarConverter::convert(std::string s)
 	}
 	else if (type == INT)
 	{
-		int intValue = std::atoi(trimStr.c_str());
-		converter.printIntTotherType(intValue);
+		long long	llValue = std::strtoll(s.c_str(), 0, 10);
+		converter.printIntTotherType(llValue);
 	}
 	else if (type == FLOAT)
 	{
-		std::cout << "trimStr = " << trimStr << std::endl;
 		if (trimStr.back() == 'f' || trimStr.back() == 'F')
 			trimStr.pop_back();
 		std::stringstream	ssf(trimStr);
-		float floatValue;
+		double floatValue;
 		ssf >> floatValue;
-		if (!ssf.fail() && \
-		(floatValue > std::numeric_limits<float>::max() || floatValue < std::numeric_limits<float>::min()))
-		{
-			// handle overflow
-		}
-		std::cout << "floatValue = " << floatValue << "f" << std::endl;
-		// convertFloatToOtherType()
+		converter.printFloatToOtherType(floatValue);
 	}
 	else if (type == DOUBLE)
 	{
 		std::stringstream	ssd(trimStr);
 		double doubleValue;
 		ssd >> doubleValue;
-		if (!ssd.fail() && \
-		(doubleValue > std::numeric_limits<double>::max() || doubleValue < std::numeric_limits<double>::min()))
-		{
-			// handle overflow
-		}
-		std::cout << "doubleValue = " << doubleValue << std::endl;
-		// convertDoubleToOtherType()
+		converter.printFloatToOtherType(doubleValue);
 	}
 }

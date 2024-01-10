@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/09 23:54:36 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/10 10:33:49 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 #include <limits>
 #include <sstream>
 #include <locale>
+#include <iomanip>
 #define	CHAR		0
 #define	INT			1
 #define	FLOAT		2
 #define	DOUBLE		3
 #define NOT_NUMBER	4
 #define INF			5
-#define ERROR		7
+#define ERROR		6
 
 // 1. detect the type of the literal passed parameter.
 // 2. convert it string to its actual type;
@@ -64,14 +65,14 @@ void	ScalarConverter::printFloatToOtherType(double value)
 	if (value < std::numeric_limits<float>::min() || value > std::numeric_limits<float>::max())
 		std::cout << "Overflow" << std::endl;
 	else
-		std::cout << value << "f" <<  std::endl;
+		std::cout << std::setprecision(10) <<  value << "f" <<  std::endl;
 
 	/* double */
 	std::cout << "double: ";
 	if (value < std::numeric_limits<double>::min() || value > std::numeric_limits<double>::max())
 		std::cout << "Overflow" << std::endl;
 	else
-		std::cout << value << std::endl;
+		std::cout << std::setprecision(10) <<  value << std::endl;
 }
 
 void	ScalarConverter::printIntTotherType(long long value)
@@ -102,10 +103,13 @@ void	ScalarConverter::printIntTotherType(long long value)
 	if (doubleValue < std::numeric_limits<float>::min() || doubleValue > std::numeric_limits<float>::max())
 		std::cout << "Overflow" << std::endl;
 	else
-		std::cout << doubleValue << ".0f" << std::endl;
+		std::cout << std::setprecision(10) << doubleValue << ".0f" << std::endl;
 
 	/* double */
-	std::cout << "double: " << doubleValue << ".0" << std::endl;
+	std::cout << "double: ";
+	if (doubleValue < std::numeric_limits<double>::min() || doubleValue > std::numeric_limits<double>::max())
+		std::cout << "Overflow" << std::endl;
+	std::cout << std::setprecision(10) << doubleValue << ".0" << std::endl;
 }
 
 void	ScalarConverter::printCharToOtherType(char value)
@@ -143,11 +147,30 @@ bool	ScalarConverter::tryParseChar(const std::string& s)
 	return (false);
 }
 
+bool	ScalarConverter::tryParseError(const std::string& s)
+{
+	int	dotCnt = 0;
+	for (size_t i = 0; i < s.length(); ++i)
+	{
+		if (std::isalpha(s[i]) && i != s.length() - 1)
+			return (true);
+		if (s[i] == '.')
+			dotCnt++;
+		if ((s[i] == 'f' || s[i] == 'F') && i != s.length() - 1)
+			return (true);
+	}
+	if (dotCnt > 1)
+		return (true);
+	return (false);
+}
+
 // detect the type of the literal passed parameter.
 int		ScalarConverter::detectType(std::string s)
 {
 	if (tryParseChar(s))
 		return (CHAR);
+	if (tryParseError(s))
+		return (ERROR);
 	if (s.find('.') != std::string::npos)
 	{
 		if (s.back() == 'f')
@@ -225,5 +248,9 @@ void	ScalarConverter::convert(std::string s)
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << trimStr + "f" << std::endl;
 		std::cout << "double: " << trimStr << std::endl;
+	}
+	else if (type == ERROR)
+	{
+		std::cout << "Error" << std::endl;
 	}
 }

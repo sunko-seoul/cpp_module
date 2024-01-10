@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:54:38 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/10 10:33:49 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/10 10:35:46 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,6 @@ void	ScalarConverter::convert(std::string s)
 	}
 	else if (type == ERROR)
 	{
-		std::cout << "Error" << std::endl;
+		std::cerr << "Error" << std::endl;
 	}
 }

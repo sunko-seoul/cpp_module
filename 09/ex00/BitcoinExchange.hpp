@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:10:30 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/16 00:25:43 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/16 00:28:45 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class BitcoinExchange
 		void	searchDatabase(std::time_t timestamp, const std::string& date, double value);
 		bool	isValidDate(int year, int month, int day);
 		std::time_t	getTimeStamp(const std::string& date);
+		double		getData(const std::string& data);
 };
 
 #endif

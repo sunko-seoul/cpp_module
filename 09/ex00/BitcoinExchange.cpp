@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:01 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/16 00:27:36 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/16 00:35:57 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,34 +114,15 @@ void	BitcoinExchange::parseInputData(void)
 		{
 			std::string::iterator delim_iter = std::find(line.begin(), line.end(), '|');
 			if (delim_iter == line.end())
-				throw std::runtime_error("Error: input.txt file format");
+				throw std::runtime_error("Error: input.txt file format.");
 			std::string date(line.begin(), delim_iter);
-			std::tm tm = {};
-			std::istringstream dateIss(date);
-			dateIss >> std::get_time(&tm, "%Y-%m-%d");
-			if (dateIss.fail() || !isValidDate(tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday))
-			{
-				std::ostringstream errorMsg;
-				errorMsg << "Error: bad input => " << date;
-				std::runtime_error error(errorMsg.str());
-				throw error;
-			}
+			std::time_t timestamp = getTimeStamp(date);
 			std::string valueString(delim_iter + 1, line.end());
-			std::istringstream valueIss(valueString);
-			double value = 0;
-			valueIss >> value;
-			if (valueIss.fail())
-			{
-				std::ostringstream errorMsg;
-				errorMsg << "Error: bad input => " << valueString;
-				std::runtime_error error(errorMsg.str());
-				throw error;
-			}
-			else if (value < 0)
+			double value = getData(valueString);
+			if (value < 0)
 				throw std::runtime_error("Error: not a positive number.");
 			else if (value > 1000)
 				throw std::runtime_error("Error: to large number.");
-			std::time_t timestamp = std::mktime(&tm);
 			searchDatabase(timestamp, date, value);
 			mInputData.insert(std::pair<std::string, double>(date, value));
 		}
@@ -163,18 +144,11 @@ void	BitcoinExchange::parseDatabase(void)
 		{
 			std::string::iterator comma_iter = std::find(line.begin(), line.end(), ',');
 			if (comma_iter == line.end())
-				throw std::runtime_error("Error: data.csv format error");
+				throw std::runtime_error("Error: data.csv format error.");
 			std::string date(line.begin(), comma_iter);
-			std::istringstream dateIss(date);
-			std::tm tm = {};
-			dateIss >> std::get_time(&tm, "%Y-%m-%d");
-			std::time_t timestamp = std::mktime(&tm);
+			std::time_t timestamp = getTimeStamp(date);
 			std::string exchageRateString(comma_iter + 1, line.end());
-			std::istringstream valueIss(exchageRateString);
-			double exchageRate = 0;
-			valueIss >> exchageRate;
-			if (valueIss.fail())
-				throw std::runtime_error("Error: data.csv format error");
+			double exchageRate = getData(exchageRateString);
 			mDatabase.insert(std::pair<std::time_t, double>(timestamp, exchageRate));
 		}
 		catch(const std::exception& e)
@@ -189,6 +163,24 @@ std::time_t	BitcoinExchange::getTimeStamp(const std::string& date)
 	std::istringstream iss(date);
 	std::tm tm = {};
 	iss >> std::get_time(&tm, "%Y-%m-%d");
+	if (iss.fail() | !isValidDate(tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday))
+	{
+		std::ostringstream errorMsg;
+		errorMsg << "Error: bad input => " << date;
+		std::runtime_error error(errorMsg.str());
+		throw error;
+	}
 	return (std::mktime(&tm));
+}
+
+double	BitcoinExchange::getData(const std::string& data)
+{
+	std::istringstream iss(data);
+	double value;
+
+	iss >> value;
+	if (iss.fail())
+		throw std::runtime_error("Error: bad input");
+	return (value);
 }
 

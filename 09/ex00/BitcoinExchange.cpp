@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:16:01 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/15 16:13:47 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/15 20:29:28 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ BitcoinExchange::BitcoinExchange(const std::string& lhs, const std::string& rhs)
 {
 	if (!mInputDataFile.is_open() || !mDatabaseFile.is_open())
 		throw std::ios_base::failure("file open failure");
-	this->parseInputData();
-	this->parseDatabase();
 }
 
 BitcoinExchange::~BitcoinExchange()
@@ -73,6 +71,8 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& rhs)
 	return (*this);
 }
 
+// getline
+// date parse => serach date => calculate value
 void	BitcoinExchange::parseInputData(void)
 {
 	std::string	line;
@@ -101,6 +101,7 @@ void	BitcoinExchange::parseInputData(void)
 	}
 }
 
+// date를 숫자로 보관해서 찾아야 하나?
 void	BitcoinExchange::parseDatabase(void)
 {
 	std::string	line;

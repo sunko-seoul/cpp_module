@@ -22,6 +22,4 @@ int main(void)
 	iss >> double_value;
 
 	std::cout << "double_value : " << double_value << std::endl;
-
-	std::cout << iss << std::endl;
 }

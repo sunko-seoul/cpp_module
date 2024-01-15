@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:10:30 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/15 16:04:12 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/16 00:25:43 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class BitcoinExchange
 {
 	private:
 		std::map<std::string, double>	mInputData;
-		std::map<std::string, double>	mDatabase;
+		std::map<std::time_t, double>	mDatabase;
 		std::string						mInputDataFilePath;
 		std::string						mDatabaseFilePath;
 		std::ifstream					mInputDataFile;
@@ -34,6 +34,9 @@ class BitcoinExchange
 		BitcoinExchange&	operator=(const BitcoinExchange& rhs);
 		void	parseInputData();
 		void	parseDatabase();
+		void	searchDatabase(std::time_t timestamp, const std::string& date, double value);
+		bool	isValidDate(int year, int month, int day);
+		std::time_t	getTimeStamp(const std::string& date);
 };
 
 #endif

@@ -61,33 +61,37 @@ std::vector<std::pair<size_t, size_t>> mergeInsert(std::vector<std::pair<size_t,
 		{
 			if (a[i].first == orig_a[j].first)
 			{
-				a[i].second = orig_a[j].second; // a의 인덱스를 꼭 복원해줘야 하나? b에게 맞는 자리만 찾아주면 될 것 같은데?
+				//a[i].second = orig_a[j].second; // a의 인덱스를 꼭 복원해줘야 하나? b에게 맞는 자리만 찾아주면 될 것 같은데?
 				b[i] = orig_b[orig_a[j].second];
 			}
 		}
 	}
 
-	// 이진 삽입 정렬하면 됨, lower bound 쓰면 된다던데 공부해보기
-	a.push_back(b[0]);
-	std::rotate(a.begin(), a.end(), a.end() + 1);
-	a[0] = b[0];
+
+	std::vector<std::pair<size_t, size_t>> d;
+	d.push_back(b[0]);
+	for (int i = 0; i < a.size(); ++i)
+		d.push_back(a[i]);
+
+	size_t	k = 1;
 
 	size_t	b_idx = 1;
 	size_t	jaco_idx = 0;
 	std::vector<std::pair<size_t, size_t>>::iterator iter;
 	while (b_idx < b.size())
 	{
-		for (size_t i = jacobsthal_diff[jaco_idx]; i > 0; i--)
+		size_t loop = std::min(static_cast<size_t>(jacobsthal_diff[jaco_idx]), b.size() - b_idx);
+		for (size_t i = loop; i > 0; --i)
 		{
-			a.push_back(b[b_idx + i]);
-			iter = std::upper_bound(a.begin(), a.end() - 1, b[b_idx + i]);
-			std::rotate(iter, a.end(), a.end() + 1);
-			*iter = b[b_idx + i];
+			d.push_back(b[b_idx + i - 1]);
+			iter = std::upper_bound(d.begin(), d.end() - 1, b[b_idx + i - 1]);
+			std::rotate(iter, d.end(), d.end() + 1);
+			*iter = b[b_idx + i - 1];
 		}
-		b_idx += jaco_idx;
+		b_idx += jacobsthal_diff[jaco_idx];
 		jaco_idx++;
 	}
-	return (a);
+	return (d);
 }
 
 int main(void)

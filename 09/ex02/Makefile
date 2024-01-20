@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 VERSION = -std=c++98
 NAME = PmergeMe
 SRCS = main.cpp \

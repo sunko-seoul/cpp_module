@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:46:57 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/19 16:02:46 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/21 00:42:08 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <list>
+#include <deque>
 #include <exception>
 
-std::vector<std::pair<size_t, size_t> >	checkMinusInterger(int argc, char *argv[])
+std::vector<int>	checkMinusInterger(int argc, char *argv[])
 {
-	std::vector<std::pair<size_t, size_t> >	v;
+	std::vector<int>	v;
 	int	i = 1;
 	while (i < argc)
 	{
@@ -28,8 +28,8 @@ std::vector<std::pair<size_t, size_t> >	checkMinusInterger(int argc, char *argv[
 		s >> a;
 		if (a <= 0)
 			throw std::runtime_error("Error");
-		size_t value = a;
-		v.push_back(std::make_pair(value, i));
+		int value = a;
+		v.push_back(value);
 		i++;
 	}
 	return (v);
@@ -45,19 +45,18 @@ int main(int argc, char *argv[])
 
 	try
 	{
-		std::vector<std::pair<size_t, size_t> > v = checkMinusInterger(argc, argv);
-		std::list<std::pair<size_t, size_t> > list;
+		std::vector<int> v = checkMinusInterger(argc, argv);
+		std::deque<int> deque;
 		for (size_t i = 0; i < v.size(); ++i)
-			list.push_back(v[i]);
-		PmergeMe m(v, list);
+			deque.push_back(v[i]);
+		PmergeMe m(v, deque);
 		v = m.mergeInsertionSort(v, v.size());
 		for (size_t i = 0; i < v.size(); ++i)
-			std::cout << v[i].first << " ";
+			std::cout << v[i] << " ";
 		std::cout << std::endl;
-		list = m.mergeInsertionSort(list, list.size());
-		std::list<std::pair<size_t, size_t> >::iterator lstIter = list.begin();
-		for (; lstIter != list.end(); lstIter++)
-			std::cout << (*lstIter).first << " ";
+		deque = m.mergeInsertionSort(deque, deque.size());
+		for (size_t i = 0; i < deque.size(); ++i)
+			std::cout << deque[i] << " ";
 		std::cout << std::endl;
 	}
 	catch(const std::exception& e)

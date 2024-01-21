@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:46:57 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/21 00:42:08 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/21 15:23:32 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <vector>
 #include <deque>
 #include <exception>
+#include <ctime>
 
 std::vector<int>	checkMinusInterger(int argc, char *argv[])
 {
@@ -24,9 +25,9 @@ std::vector<int>	checkMinusInterger(int argc, char *argv[])
 	while (i < argc)
 	{
 		std::stringstream s(argv[i]);
-		int a;
+		long long a;
 		s >> a;
-		if (a <= 0)
+		if (a <= 0 || a > std::numeric_limits<int>::max())
 			throw std::runtime_error("Error");
 		int value = a;
 		v.push_back(value);
@@ -35,29 +36,29 @@ std::vector<int>	checkMinusInterger(int argc, char *argv[])
 	return (v);
 }
 
+void	printVector(const std::vector<int>& v)
+{
+	for (size_t i = 0; i < v.size(); ++i)
+		std::cout << v[i] << " ";
+	std::cout << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
-	if (argc == 1)
+	if (argc == 1 || argc > 3001)
 	{
 		std::cerr << "Error" << std::endl;
 		std::exit(1);
 	}
-
 	try
 	{
 		std::vector<int> v = checkMinusInterger(argc, argv);
 		std::deque<int> deque;
-		for (size_t i = 0; i < v.size(); ++i)
-			deque.push_back(v[i]);
 		PmergeMe m(v, deque);
-		v = m.mergeInsertionSort(v, v.size());
-		for (size_t i = 0; i < v.size(); ++i)
-			std::cout << v[i] << " ";
-		std::cout << std::endl;
-		deque = m.mergeInsertionSort(deque, deque.size());
-		for (size_t i = 0; i < deque.size(); ++i)
-			std::cout << deque[i] << " ";
-		std::cout << std::endl;
+		std::cout << "Before: ";
+		printVector(v);
+		m.sortVector();
+		m.sortDeque();
 	}
 	catch(const std::exception& e)
 	{

@@ -6,11 +6,12 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:46:46 by sunko             #+#    #+#             */
-/*   Updated: 2024/01/21 00:42:58 by sunko            ###   ########.fr       */
+/*   Updated: 2024/01/21 15:26:23 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <iostream>
 
 const size_t PmergeMe::Diff[] = {
 	2, 2, 6, 10, 22, 42, 86,
@@ -31,7 +32,10 @@ PmergeMe::~PmergeMe()
 
 PmergeMe::PmergeMe(const std::vector<int>& vec, const std::deque<int>& deque)
 	: mVec(vec), mQue(deque)
-{}
+{
+	for (size_t i = 0; i < mVec.size(); ++i)
+		mQue.push_back(mVec[i]);
+}
 
 
 PmergeMe::PmergeMe(const PmergeMe& rhs)
@@ -193,6 +197,27 @@ std::deque<int> PmergeMe::mergeInsertionSort(std::deque<int> v, size_t size)
 	return (d);
 }
 
+void	PmergeMe::sortVector(void)
+{
+	clock_t	start_time = clock();
+	mVec = mergeInsertionSort(mVec, mVec.size());
+	clock_t end_time = clock();
+	std::cout << "After:  ";
+	for (size_t i = 0; i < mVec.size(); ++i)
+		std::cout << mVec[i] << " ";
+	std::cout << std::endl;
+	clock_t elapsed_time = static_cast<double>(end_time - start_time);
+	std::cout << "Time to process a range of " << mVec.size() << " elements with std::vector : " << elapsed_time << " (CLK_TCK)" << std::endl;
+}
+
+void	PmergeMe::sortDeque(void)
+{
+	clock_t	start_time = clock();
+	mQue = mergeInsertionSort(mQue, mQue.size());
+	clock_t end_time = clock();
+	clock_t elapsed_time = static_cast<double>(end_time - start_time);
+	std::cout << "Time to process a range of " << mVec.size() << " elements with std::deque : " << elapsed_time << " (CLK_TCK)" << std::endl;
+}
 
 
 
